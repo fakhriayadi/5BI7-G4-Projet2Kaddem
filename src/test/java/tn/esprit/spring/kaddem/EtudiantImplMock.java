@@ -33,7 +33,7 @@ public class EtudiantImplMock {
             add(new Etudiant("f3", "l3"));
         }
     };
-
+//
     @Test
     public void testRetrieveUser() {
         Mockito.when(etudiantRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(etudiant));
