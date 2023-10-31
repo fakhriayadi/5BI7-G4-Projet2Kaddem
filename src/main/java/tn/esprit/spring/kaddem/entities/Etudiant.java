@@ -11,6 +11,7 @@ import javax.persistence.*;
 
 
 @SuppressWarnings("SpellCheckingInspection")
+//
 @Entity
 public class Etudiant implements Serializable{
     @Id
