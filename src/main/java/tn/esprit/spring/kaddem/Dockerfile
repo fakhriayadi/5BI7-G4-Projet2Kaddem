@@ -1,5 +1,5 @@
-# Utilisez une image OpenJDK avec la version 1.8.0_60
-FROM openjdk:1.8.0_60-jre
+# Utilisez une image OpenJDK 8
+FROM openjdk:8-jre
 
 # Copiez le contenu du répertoire "target" de votre projet à la racine du conteneur
 ADD target/kaddem-SNAPSHOT-01.jar kaddem-SNAPSHOT-01.jar
