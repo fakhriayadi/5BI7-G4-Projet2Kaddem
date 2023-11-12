@@ -21,7 +21,7 @@ public class EtudiantImplTest {
     IEtudiantService etudiantService;
     @Test
     @Order(1)
-    public void testRetrieveAllUsers() {
+    public void testRetrieveAllEtudiants() {
         List<Etudiant> listEtudiants = etudiantService.retrieveAllEtudiants();
         Assertions.assertEquals(0, listEtudiants.size());
     }
