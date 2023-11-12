@@ -35,7 +35,7 @@ public class EtudiantImplMock {
     };
 //
     @Test
-    public void testRetrieveUser() {
+    public void testRetrieveEtudiant() {
         Mockito.when(etudiantRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(etudiant));
         Etudiant etudiant1 = etudiantService.retrieveEtudiant(2);
         Assertions.assertNotNull(etudiant1);
