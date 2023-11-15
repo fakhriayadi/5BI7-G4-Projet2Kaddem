@@ -1,11 +1,11 @@
-# Utilisez une image OpenJDK 8
-FROM openjdk:8-jre
+# Use the official OpenJDK base image
+FROM openjdk:8-jdk-alpine
 
-# Copiez le contenu du répertoire "target" de votre projet à la racine du conteneur
-ADD target/kaddem-1.0.2.jar kaddem-1.0.2.jar
+# Add your JAR file from the local filesystem to the image
+ADD target/kaddem-1.0.2.jar app.jar
 
-# Exposez le port sur lequel votre application Java écoutera (utilisez un port disponible qui ne soit pas en conflit avec d'autres services)
+# Expose the port your application will run on
 EXPOSE 8089
 
-# Définissez la commande d'entrée pour exécuter votre application Java (utilisez le nom du JAR correct)
-ENTRYPOINT ["java", "-jar", "/kaddem-1.0.2.jar"]
+# Define the command to run your application
+CMD ["java", "-jar", "app.jar"]

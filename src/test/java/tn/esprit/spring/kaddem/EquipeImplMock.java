@@ -21,6 +21,9 @@ import tn.esprit.spring.kaddem.services.EtudiantServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import tn.esprit.spring.kaddem.entities.Niveau;
+
+
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -33,22 +36,29 @@ public class EquipeImplMock {
 
     @InjectMocks
     EquipeServiceImpl equipeService;
-    Etudiant etudiant = new Etudiant("f1", "l1");
-    List<Etudiant> listEtudiants = new ArrayList<Etudiant>() {
+
+    Equipe equipe = new Equipe(1, "f1", Niveau.EXPERT);
+    List<Equipe> listEquipes = new ArrayList<Equipe>() {
         {
-            add(new Equipe("f2", "l2"));
-            add(new Equipe("f3", "l3"));
+            add(new Equipe(3, "f2", Niveau.JUNIOR));
+            add(new Equipe(4, "f3", Niveau.SENIOR));
         }
     };
+
     //
     @Test
-    public void testRetrieveEtudiant() {
-        Mockito.when(etudiantRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(etudiant));
-        Etudiant etudiant1 = etudiantService.retrieveEtudiant(2);
-        Assertions.assertNotNull(etudiant1);
+    public void testAddEquipe() {
+        Mockito.when(equipeRepository.save(Mockito.any(Equipe.class))).thenReturn(equipe);
+        Equipe addedEquipe = equipeService.addEquipe(equipe);
+        Assertions.assertNotNull(addedEquipe);
+        Assertions.assertEquals(equipe.getIdEquipe(), addedEquipe.getIdEquipe());
+        // Add more assertions based on your implementation
+
+        Mockito.verify(equipeRepository, Mockito.times(1)).save(Mockito.any(Equipe.class));
     }
-
-
 }
+
+
+
 
 

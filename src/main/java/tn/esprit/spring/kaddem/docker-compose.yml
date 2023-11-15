@@ -1,28 +1,35 @@
-version: "2.2"
+version: '3'
+
 services:
   mysqldb:
     container_name: mysqldb
-    image: mysql:latest
+    image: mysql:5.7
     restart: unless-stopped
-    ports:
-      - 3306:3306
     environment:
-      - MYSQL_USER:root
-      - MYSQL_PASSWORD:root
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=fakhridb
-    volumes:
-      - db_vol:/var/lib/mysqldb
-
-  departement_app:
-    build: ./
-    image: fakhriayadi-5bi7-g4-kaddem
-    restart: unless-stopped
+      MYSQL_DATABASE: kaddemdb
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
-      - 8089:8089
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+  app:
     depends_on:
       - mysqldb
-
+    build: .
+    container_name: prkaddem
+    restart: on-failure
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url": "jdbc:mysql://mysqldb:3306/kaddemdb?useSSL=false",
+        "spring.datasource.username": "root",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect",
+        "spring.jpa.hibernate.ddl-auto": "update"
+      }'
+    volumes:
+      - .m2:/root/.m2
 
 volumes:
-  db_vol: {}
+  db:
+
